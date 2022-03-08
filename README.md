@@ -1,1 +1,1 @@
-this file will introduc us to **shell**
+this file will introduce us to **shell**
