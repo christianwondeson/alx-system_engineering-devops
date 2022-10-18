@@ -2,23 +2,26 @@
 """
 Python script to export data in the JSON format.
 """
-import requests as r
 import json
+import requests as r
 from sys import argv
 
 if __name__ == "__main__":
     employee_id = argv[1]
-    resp_user = r.get(
-        'https://jsonplaceholder.typicode.com/users/{}'.format(employee_id))
-    resp_todos = r.get(
-        'https://jsonplaceholder.typicode.com/users/{}/todos'.format(employee_id))
+    url_user = 'https://jsonplaceholder.typicode.com/users/{}'.format(
+        employee_id)
+    url_todos = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(
+        employee_id)
+
+    resp_user = r.get(url_user)
+    resp_todos = r.get(url_todos)
 
     try:
         users = resp_user.json()
         user_todos = resp_todos.json()
 
         tasks = list(map(lambda todo: {
-            "title": todo.get('title'),
+            "task": todo.get('title'),
             "completed": todo.get('completed'),
             "username": users.get('username')
         }, user_todos))
